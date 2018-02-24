@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request, send_file, session, flash, redirect, url_for, logging
-from flask_mysqldb import MySQL
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
-from passlib.hash import sha256_crypt
+from polaroid import app
+from flask import Flask, render_template, request, send_file, session, flash
 import os
 from wand.image import Image
 import ctypes
@@ -10,10 +8,10 @@ from wand.color import Color
 from wand.drawing import Drawing
 from wand.image import Image
 
-app = Flask(__name__)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 target = os.path.join(APP_ROOT, 'images/')
+app.config['SECRET_KEY'] = "lundbc"
 
 library.MagickPolaroidImage.argtypes = (ctypes.c_void_p,  # MagickWand *
                                         ctypes.c_void_p,  # DrawingWand *
@@ -70,28 +68,3 @@ def download():
     file_data = '/'.join([APP_ROOT, file_name])
     return send_file(file_data, attachment_filename='editedfile.jpg',
                      as_attachment=True)
-
-class RegisterForm(Form):
-    name = StringField('Name', [validators.Length(min=1, max=50)])
-    username = StringField('Username', [validators.Length(min=4, max=25)])
-    email = StringField('Email', [validators.Length(min=6, max=50)])
-    password = PasswordField('Password', [
-        validators.DataRequired(),
-        validators.EqualTo('confirm', message='Passwords do not match')
-    ])
-    confirm = PasswordField('Confirm Password')
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    form = RegisterForm(request.form)
-    if request.method == 'POST' and form.validate():
-        
-
-
-
-    return render_template('register.html', form=form)
-
-if __name__ == '__main__':
-    app.secret_key = 'super secret key'
-    app.config['SESSION_TYPE'] = 'filesystem'
-    app.run(debug=True)
