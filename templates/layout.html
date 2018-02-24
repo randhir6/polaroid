@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html class='no-js'>
+    <head>
+        <meta charset='utf-8'>
+        <title>Polaroid Editor</title>
+
+        {% block head %} {% endblock %} 
+
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+    </head>
+    <body>
+        <div class='container'>
+            {% include 'includes/_navbar.html' %}
+        </div>
+       
+        {% block body %} {% endblock %}  
+        
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
+    </body>
+</html>

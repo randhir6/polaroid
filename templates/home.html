@@ -1,0 +1,15 @@
+{% extends  'layout.html' %}
+
+{% block body %}
+    <div class='jumbotron text-center'>
+        <h1>Welcome to Polaroid Editor</h1>
+        <p class='lead'>
+            This application is to help you edit pictures and turn it into a polaroid.
+        </p>
+        <form id='upload-form' action='{{ url_for('upload')}}' method='POST', enctype='multipart/form-data'>
+            <input type='file' name='file' accept='image/' multiple>
+            <input id='button' type='submit' value='send'>
+        </form>
+    </div>
+
+{% endblock %}

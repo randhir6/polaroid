@@ -1,0 +1,13 @@
+{% extends  'layout.html' %}
+
+{% block body %}
+    <div class='jumbotron text-center'>
+        <h1>Welcome to Polaroid Editor</h1>
+        <p class='lead'>
+            This application is to help you edit pictures and turn it into a polaroid.
+        </p>
+        <form id='download-form' action='{{ url_for('download')}}' method='GET', enctype='multipart/form-data'>
+            <input type='submit' value='Download'>
+        </form>
+    </div>
+{% endblock %}
